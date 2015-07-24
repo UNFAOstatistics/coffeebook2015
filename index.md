@@ -8,6 +8,13 @@ title: FAO Coffee pocketbook 2015
 <img src="https://laurenkgray.files.wordpress.com/2013/07/coffee-mug.jpg" width=150 style="float: right;"/>
 
 
+Colors used in the book are
+
+- [Coffee](https://en.wikipedia.org/wiki/Coffee_%28color%29)
+- [Café au Lait](https://en.wikipedia.org/wiki/Coffee_(color)#Caf.C3.A9_au_Lait)
+- [Café Noir](https://en.wikipedia.org/wiki/Coffee_(color)#Caf.C3.A9_au_Lait)
+
+
 <!--
 <div class="home">
 
