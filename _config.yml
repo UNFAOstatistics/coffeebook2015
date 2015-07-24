@@ -1,0 +1,12 @@
+# Site settings
+title: FAO Coffee pocketbook 2015
+email: markus.kainu@fao.org
+description: "Coffee pocketbook 2015"
+baseurl: "http://unfaostatistics.github.io/coffeebook2015/"
+url: "http://unfaostatistics.github.io/coffeebook2015/"
+
+# Build settings
+markdown: redcarpet
+redcarpet:
+  extensions: ["tables"]
+higlighter: rouge
