@@ -5,16 +5,16 @@ title: FAO Coffee pocketbook 2015
 
 ## Intro
 
+
+![](http://data.fao.org/ref/1f3cf16b-d925-4686-b554-56d374c9808d/medium)
+
+
+
+
+
+
+<!--
 <img src="https://laurenkgray.files.wordpress.com/2013/07/coffee-mug.jpg" width=150 style="float: right;"/>
-
-
-Colors used in the book are
-
-- [Coffee](https://en.wikipedia.org/wiki/Coffee_%28color%29)
-- [Café au Lait](https://en.wikipedia.org/wiki/Coffee_(color)#Caf.C3.A9_au_Lait)
-- [Café Noir](https://en.wikipedia.org/wiki/Coffee_(color)#Caf.C3.A9_au_Lait)
-
-
 
 <div class="home">
 
@@ -32,8 +32,6 @@ Colors used in the book are
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
-
-
-Please email <a href="mailto:markus.kainu@fao.org?Subject=FAO regional yearboks" target="_top">Markus.Kainu@fao.org</a> if you have questions about the site.
+-->
 
 
