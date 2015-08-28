@@ -1,3 +1,5 @@
 _site
 update_site.R
 .Rproj.user
+*.png
+*.pdf

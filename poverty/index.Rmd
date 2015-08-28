@@ -4,3 +4,44 @@ title:  "Poverty"
 date:   2015-10-08 15:46:20
 categories: pocketbook
 ---
+
+```{r setup-code-part5}
+knitr::read_chunk(paste0(root.dir,"input/code/code_part5.R"))
+```
+
+```{r part5_setup, eval=include_part5}
+```
+
+
+```{r P5povertyTEXT, eval=P5poverty, short_text_ChartPage=P5poverty}
+```
+
+
+```{r P5povertyData, cache=TRUE,results='hide', eval=P5poverty}
+```
+
+
+
+```{r P5povertyTOPRIGHT, eval=P5poverty, top_right_minitable=P5poverty, results='hide'}
+```
+
+
+```{r poverty_datatable}
+kable(dw)
+```
+
+
+
+```{r P5povertyLEFT, eval=P5poverty, left_plot=P5poverty, fig.height=left_plot_height, fig.width=left_plot_width}
+```
+
+```{r P5povertyRIGHT, eval=P5poverty ,right_plot=P5poverty, fig.height=right_plot_height, fig.width=right_plot_width}
+```
+
+
+```{r P5povertyBOTTOM, eval=P5poverty, bottom_plot=P5poverty, fig.height=bottom_plot_height, fig.width=bottom_plot_width}
+```
+
+
+```{r P5povertyMAP, eval=P5poverty, map_plot=P5poverty, fig.width=map_plot_width, fig.height= map_plot_height}
+```

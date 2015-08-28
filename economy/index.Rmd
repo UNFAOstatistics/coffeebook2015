@@ -4,3 +4,37 @@ title:  "Economy"
 date:   2015-10-08 15:46:20
 categories: pocketbook
 ---
+
+```{r setup-code-part5}
+knitr::read_chunk(paste0(root.dir,"input/code/code_part5.R"))
+```
+
+```{r part5_setup, eval=include_part5}
+```
+
+
+```{r P5econTEXT, eval=P5econ, short_text_ChartPage=P5econ}
+```
+
+```{r P5econTOPRIGHT, eval=P5econ, top_right_plot=P5econ, fig.height=top_right_plot_height, fig.width=top_right_plot_width}
+```
+
+
+```{r P5econLEFT, eval=P5econ, left_plot=P5econ, fig.height=left_plot_height, fig.width=left_plot_width}
+```
+
+```{r P5econRIGHT, eval=P5econ ,right_plot=P5econ, fig.height=right_plot_height, fig.width=right_plot_width}
+```
+
+
+```{r P5econBOTTOM_data, cache=TRUE}
+```
+
+
+
+```{r P5econBOTTOM, eval=P5econ, bottom_plot=P5econ, fig.height=bottom_plot_height, fig.width=bottom_plot_width}
+```
+
+
+```{r P5econMAP, eval=P5econ, map_plot=P5econ, fig.width=map_plot_width, fig.height= map_plot_height}
+```

@@ -4,3 +4,40 @@ title:  "Dietary energy supply"
 date:   2015-10-08 15:46:20
 categories: pocketbook
 ---
+
+
+
+```{r setup-code-part5}
+knitr::read_chunk(paste0(root.dir,"input/code/code_part5.R"))
+```
+
+
+```{r part5_setup, eval=include_part5}
+```
+
+
+
+
+```{r P5desTEXT, eval=P5des, short_text_ChartPage=P5des}
+```
+
+```{r P5desData,results='hide', cache=TRUE, eval=P5des}
+```
+
+
+```{r P5desTOPRIGHT, eval=P5des, top_right_plot=P5des, fig.height=top_right_plot_height, fig.width=top_right_plot_width}
+```
+
+```{r P5desLEFT, eval=P5des, left_plot=P5des, fig.height=left_plot_height, fig.width=left_plot_width}
+```
+
+```{r P5desRIGHT, eval=P5des ,right_plot=P5des, fig.height=right_plot_height, fig.width=right_plot_width}
+```
+
+
+```{r P5desBOTTOM, eval=P5des, bottom_plot=P5des, fig.height=bottom_plot_height, fig.width=bottom_plot_width}
+```
+
+
+```{r P5desMAP, eval=P5des, map_plot=P5des, fig.width=map_plot_width, fig.height= map_plot_height}
+```

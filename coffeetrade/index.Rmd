@@ -1,0 +1,42 @@
+---
+layout: default
+title:  "Coffee trade"
+date:   2015-10-08 15:46:20
+categories: pocketbook
+---
+
+```{r setup-code-part6}
+knitr::read_chunk(paste0(root.dir,"input/code/code_part6.R"))
+```
+
+
+```{r part6_setup, eval=include_part6}
+```
+
+
+```{r P6coffeetradeTEXT, eval=P6coffeetrade, short_text_ChartPage=P6coffeetrade}
+```
+
+
+```{r P6coffeetradeData, cache=TRUE,results='hide', eval=P6coffeetrade}
+```
+
+
+
+```{r P6coffeetradeTOPRIGHT, eval=P6coffeetrade, top_right_plot=P6coffeetrade, fig.height=top_right_plot_height, fig.width=top_right_plot_width}
+```
+
+
+```{r P6coffeetradeLEFT, eval=P6coffeetrade, left_plot=P6coffeetrade, fig.height=left_plot_height, fig.width=left_plot_width}
+```
+
+```{r P6coffeetradeRIGHT, eval=P6coffeetrade ,right_plot=P6coffeetrade, fig.height=right_plot_height, fig.width=right_plot_width}
+```
+
+
+```{r P6coffeetradeBOTTOM, eval=P6coffeetrade, bottom_plot=P6coffeetrade, fig.height=bottom_plot_height, fig.width=bottom_plot_width}
+```
+
+
+```{r P6coffeetradeMAP, eval=P6coffeetrade, map_plot=P6coffeetrade, fig.width=map_plot_width, fig.height= map_plot_height}
+```

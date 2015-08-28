@@ -15,6 +15,16 @@ html {
 body {
   margin: 0;
 }
+
+.caption {
+  font-size: 0.9em;
+  color: #6F4E37;
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+
 article,
 aside,
 details,
