@@ -15,7 +15,7 @@ Colors used in the book are
 - [Café Noir](https://en.wikipedia.org/wiki/Coffee_(color)#Caf.C3.A9_au_Lait)
 
 
-<!--
+
 <div class="home">
 
   <h3>Recent updates</h3>
@@ -32,7 +32,7 @@ Colors used in the book are
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
--->
+
 
 Please email <a href="mailto:markus.kainu@fao.org?Subject=FAO regional yearboks" target="_top">Markus.Kainu@fao.org</a> if you have questions about the site.
 

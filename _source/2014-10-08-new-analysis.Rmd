@@ -1,29 +1,227 @@
 ---
 layout: post
-title:  "New analysis!"
-date:   2014-10-08 15:46:20
-categories: analysis
+title:  "Part5"
+date:   2015-10-08 15:46:20
+categories: pocketbook
 ---
 
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=TRUE,warning=FALSE,message=FALSE))
+```{r setup,  echo=FALSE, results='hide'}
+knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE))
+```
+
+```{r setup1, echo=FALSE, results='hide'}
+# set root directory
+root.dir <- "~/btsync/faosync/pocketbooks/regional15/"
+# set data directory
+data.dir <- "~/btsync/faosync/pocketbooks/GSPB15/database/"
 ```
 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-summary(cars)
+```{r setup-code-general, results='hide'}
+knitr::read_chunk(paste0(root.dir,"run.R"))
 ```
 
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
+```{r chapters_to_include, results='hide'}
 ```
+
+```{r load_libraries, results='hide'}
+```
+
+```{r load_data, results='hide'}
+```
+
+```{r source, results='hide'}
+source(paste0(root.dir,"input/code/define_regions.R"))
+
+region_to_report <- "COF"
+  
+### Which spreads
+spreads <- read_csv(paste0(root.dir,"/input/define_spreads.csv"))
+# subset to particular regions colunm 
+spreads <- spreads[c("SPREAD",region_to_report)]
+
+# 
+for (i in 1:nrow(spreads)) {
+  if (spreads[[i,2]] == 0) value <- FALSE
+  if (spreads[[i,2]] == 1) value <- TRUE
+  assign(spreads[[i,1]],value,envir = globalenv())
+}
+
+# remove figures from previous region
+unlink(paste0(root.dir,"/output/process/figure"), recursive = TRUE)
+
+```
+
+```{r setup-code-overview}
+
+subgrouping <- function(region_to_report, gather=TRUE){
+  df <- region_key[c("FAOST_CODE","SHORT_NAME",names(region_key)[grep(region_to_report, names(region_key))])]
+  df <- df[which(df[[region_to_report]]),]
+  # subregions for this region
+  subregion <- names(df)[grep(paste0(region_to_report,"_"), names(df))]
+  n_subregion <- length(subregion)
+  # create n_subregions number of empty vars
+  if (n_subregion >= 1) df$subgroup1 <- ""
+  if (n_subregion >= 2) df$subgroup2 <- ""
+  if (n_subregion >= 3) df$subgroup3 <- ""
+  if (n_subregion >= 4) df$subgroup4 <- ""
+  if (n_subregion >= 5) df$subgroup5 <- ""
+  if (n_subregion >= 6) df$subgroup6 <- ""
+  if (n_subregion >= 7) df$subgroup7 <- ""
+  if (n_subregion >= 8) df$subgroup8 <- ""
+  if (n_subregion >= 9) df$subgroup9 <- ""
+  if (n_subregion >= 10) df$subgroup10 <- ""
+  if (n_subregion >= 11) df$subgroup11 <- ""
+  if (n_subregion >= 12) df$subgroup12 <- ""
+  if (n_subregion >= 13) df$subgroup13 <- ""
+  if (n_subregion >= 14) df$subgroup14 <- ""
+  if (n_subregion >= 15) df$subgroup15 <- ""
+  if (n_subregion >= 16) stop("more than 16 subregions. Current code cannot handle it!")
+  
+  for (i in 1:n_subregion) {
+        df[[paste0("subgroup",i)]] <- ifelse(df[[subregion[i]]] & df[[paste0("subgroup",i)]] == "",
+                                             subregion[i],
+                                             df[[paste0("subgroup",i)]]) 
+  }
+  for (i in 1:n_subregion) {
+          df[[paste0("subgroup",i)]] <- str_replace_all(df[[paste0("subgroup",i)]], paste0(region_to_report,"_"), "")
+          df[[paste0("subgroup",i)]] <- str_replace_all(df[[paste0("subgroup",i)]], "_", " ")
+  }
+  df$subgroup <- ""
+  if (gather){
+    df_x <- data.frame()
+    for (i in 1:n_subregion) {
+          FAOST_CODE <- ifelse(df[[paste0("subgroup",i)]] != "",df$FAOST_CODE, NA)
+          subgroup <- ifelse(df[[paste0("subgroup",i)]] != "",df[[paste0("subgroup",i)]], NA)
+          df_x <- rbind(df_x,data.frame(FAOST_CODE,subgroup))
+    }
+    df <- na.omit(df_x)
+  } else {
+      for (i in 1:n_subregion) {
+          df$subgroup <- paste(df$subgroup, df[[paste0("subgroup",i)]], sep="+")
+        }
+        df$subgroup <- str_trim(df$subgroup)
+        df$subgroup <- str_replace_all(df$subgroup, "^\\++", "")
+        df$subgroup <- str_replace_all(df$subgroup, "\\++$", "")
+        df$subgroup <- str_replace_all(df$subgroup, "\\++", " AND ")
+    }
+  
+  if (region_to_report == "RNE") {
+    df$subgroup[df$subgroup %in% "Gulf Cooperation Council States and Yemen"] <- "Gulf Cooperation\nCouncil States\nand Yemen"
+    df$subgroup[df$subgroup %in% "Other Near East countries"] <- "Other Near East\ncountries"
+  }
+  
+  df[c("FAOST_CODE","subgroup")]
+}
+
+
+
+
+
+
+# function plotting maps!
+
+create_map_here <- function(){
+
+  colPart = plot_colors(part = syb_part, 12)
+  mapColFun = colorRampPalette(c("white", colPart[["Main"]][1]))
+  
+  if ("No Data" %in% unique(cat_data$value_cat)) {
+    nCol = length(levels(cat_data$value_cat)) -1
+    tmpCol = mapColFun(nCol)[2]
+    mapColFun = colorRampPalette(c(tmpCol, colPart[["Main"]][1]))
+    mapColors = mapColFun(nCol)
+    mapColors <- c("grey70", mapColors)
+  } 
+  if (!("No Data" %in% unique(cat_data$value_cat))){
+    nCol = length(levels(cat_data$value_cat))
+    tmpCol = mapColFun(nCol)[2]
+    mapColFun = colorRampPalette(c(tmpCol, colPart[["Main"]][1]))
+    mapColors = mapColFun(nCol)
+  }
+
+
+  # Create the plot
+p <- ggplot(data=map.plot, aes(long,lat,group=group))
+#  ---- grid below the countries ------------------------
+p <- p + geom_path(data = gr_rob, aes(long, lat, group = group, fill = NULL), 
+              linetype = "solid", color = col.main2, alpha=.1)
+# Grey for the non-data regions
+p <- p + geom_polygon(aes(fill = value_cat), colour = NA)
+p <- p + geom_polygon(fill=NA,colour = alpha("white", 1/2), size=.4, guide = FALSE)
+p <- p + scale_fill_manual(values=mapColors) # no data to think about
+p <- p + theme(legend.position = c(0.05,0.05), 
+                          legend.justification=c(0,0),
+                          legend.key.size=unit(6,'mm'),
+                          legend.direction = "vertical",
+                          legend.background=element_rect(colour=NA, fill=alpha("white", 1/3)),
+                          #legend.background=element_rect(colour=NA, fill=NA),
+                          legend.text=element_text(size=12), 
+                          legend.title=element_text(size=12), 
+                          title=element_text(size=16), 
+                          panel.background = element_blank(), 
+                          plot.background = element_blank(),
+                          panel.grid.minor = element_blank(),
+                          panel.grid.major = element_blank(),
+                          axis.text = element_blank(), 
+                          axis.title = element_blank(), 
+                          axis.ticks = element_blank())
+if (region_to_report == "REU") p <- p + coord_cartesian(xlim=c(-4290114,13198767,ylim=c(1965387,8184223)))
+if (region_to_report == "RNE") p <- p + coord_cartesian(xlim=c(-4078415,1783566,ylim=c(29258,6247852)))
+if (region_to_report == "LAC") p <- p + coord_cartesian(xlim=c(-14078415,-1078415,ylim=c(29258,0)))
+p <- p + guides(fill = guide_legend(title = map_unit, family="PT Sans",
+                                     title.position = "top", 
+                                     title.hjust=0))
+p <- p + guides(colour=FALSE)
+p
+}
+
+```
+
+
+
+```{r setup-code-part5}
+knitr::read_chunk(paste0(root.dir,"input/code/code_part5.R"))
+```
+
+
+
+```{r part5_setup, eval=include_part5}
+```
+
+<!--
+#    ___                                  _                   
+#   / _ \  __   __   ___   _ __  __   __ (_)   ___  __      __
+#  | | | | \ \ / /  / _ \ | '__| \ \ / / | |  / _ \ \ \ /\ / /
+#  | |_| |  \ V /  |  __/ | |     \ V /  | | |  __/  \ V  V / 
+#   \___/    \_/    \___| |_|      \_/   |_|  \___|   \_/\_/  
+#                                                            
+-->
+
+
+```{r P5overTEXT}
+```
+
+```{r P5overData, results='hide'}
+```
+
+
+```{r P5overTOPRIGHT}
+```
+
+
+```{r P5overLEFT}
+```
+
+
+```{r P5overBOTTOM}
+```
+
+
+```{r P5overMAP, eval=FALSE}
+```
+
+
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
 [jekyll]:    http://jekyllrb.com
