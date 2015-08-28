@@ -96,7 +96,9 @@ sub {
   bottom: -0.25em;
 }
 img {
-  border: 0;
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
 }
 svg:not(:root) {
   overflow: hidden;
