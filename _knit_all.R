@@ -14,9 +14,6 @@ source(paste0(root.dir,"input/code/define_regions.R"))
 source("_code/hooks_and_parameters.R")
 
 
-library(knitr)
-knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE))
-
 spreads <- readr::read_csv(paste0(root.dir,"/input/define_spreads.csv"))
 # subset to particular regions colunm 
 spreads <- spreads[c("SPREAD",region_to_report)]

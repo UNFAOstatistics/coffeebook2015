@@ -4,13 +4,13 @@ options(scipen = 999)
 #pdf.options(useDingbats = TRUE)
 
 # knit_hooks$set(chunk = function(x, options) x) # do not wrap output in kframe
-# 
+#
 # syb_pdf = function(file, width, height) {
 #   pdf(file, width = width, height = height, pointsize = 10, family = "PT Sans")
 # }
 
 
-opts_chunk$set(list(echo=FALSE,
+opts_chunk$set(list(echo=TRUE,
                     eval=TRUE,
                     cache=FALSE,
                     warning=FALSE,
@@ -24,11 +24,11 @@ opts_chunk$set(list(echo=FALSE,
 # Why we have to short_text_ChartPage and short_text_ChartPage2 hooks etc......
 
 knit_hooks$set(short_text_ChartPage = function(before, options, envir) {
-  
+
   # challenge with hooks was that when eval=FALSE hook was still executed and produced error
   # Added the following line for each hook that stops the function IF there is FALSE in eval either
   # written directly or passed through the spread condition region gadget thing..
-  
+
   if (options$short_text_ChartPage == FALSE) return()
   # Set fig size
   fig.width  =  3
@@ -40,11 +40,11 @@ knit_hooks$set(short_text_ChartPage = function(before, options, envir) {
 })
 
 knit_hooks$set(short_text_ChartPage2 = function(before, options, envir) {
-  
+
   # challenge with hooks was that when eval=FALSE hook was still executed and produced error
   # Added the following line for each hook that stops the function IF there is FALSE in eval either
   # written directly or passed through the spread condition region gadget thing..
-  
+
   if (options$short_text_ChartPage2 == FALSE) return()
   # Set fig size
   fig.width  =  3
@@ -54,104 +54,104 @@ knit_hooks$set(short_text_ChartPage2 = function(before, options, envir) {
                   "<p>",short_text,"</p> \n"))
   }
 })
-# 
-# 
+#
+#
 knit_hooks$set(top_right_plot = function(before, options, envir) {
-  
+
   if (options$top_right_plot == FALSE) return()
-  
+
   if (before) {
     #return("")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
   }
 })
-# 
-# 
+#
+#
 knit_hooks$set(top_right_minitable = function(before, options, envir) {
-  
+
   if (options$top_right_minitable == FALSE) return()
-  
+
   if (before) {
     #return("\\RightText{ \n")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
   }
 })
-# 
-# 
-# 
+#
+#
+#
 knit_hooks$set(left_plot = function(before, options, envir) {
-  
+
   if (options$left_plot == FALSE) return()
   if (before) {
     #return("\\LeftChart{\\begin{chart} \n")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
   }
 })
-# 
+#
 knit_hooks$set(right_plot = function(before, options, envir) {
-  
+
   if (options$right_plot == FALSE) return()
   if (before) {
     #return("\\RightChart{\\begin{chart} \n")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
   }
 })
-# 
+#
 knit_hooks$set(bottom_plot = function(before, options, envir) {
-  
+
   if (options$bottom_plot == FALSE) return()
   if (before) {
     #return("\\BottomChart{\\begin{chart} \n")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
     # return(paste0("\\end{chart}} \n \\end{ChartPage}"))
   }
 })
-# 
-# 
+#
+#
 # knit_hooks$set(bottom_plot2 = function(before, options, envir) {
-#   
+#
 #   if (options$bottom_plot2 == FALSE) return()
 #   if (before) {
 #     return("\\BottomChart{\\begin{chart} \n")
 #   } else {
-#     
+#
 #     return(paste0("\\caption{",caption_text,"}","\\end{chart}} \n \\end{ChartPage2}"))
 #     #return(paste0("\\end{chart}} \n \\end{ChartPage2}"))
 #   }
 # })
-# 
-# 
-# 
+#
+#
+#
 # # knit_hooks$set(end_chunk = function(before, options, envir) {
-# #   
+# #
 # #      if (!before) {
 # #        return("\\end{ChartPage}")
 # #     }
-# # 
+# #
 # # })
-# 
+#
 knit_hooks$set(map_plot = function(before, options, envir) {
-  
+
   if (options$map_plot == FALSE) return()
   if (before) {
     #return("\\begin{figure} \n")
   } else {
-    
+
     return(paste0("</br> <p class='caption'>",caption_text,"</p>"))
   }
-  
+
 })
-# 
+#
 # # remove all the kframe tags from all chunk outputs (as we are placing outputs in custom environments already!)
 # local({
 #   hook_chunk = knit_hooks$get('chunk')
@@ -164,20 +164,20 @@ knit_hooks$set(map_plot = function(before, options, envir) {
 #     } else x
 #   })
 # })
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
 top_right_plot_height <- 6
 top_right_plot_width  <- 10
